@@ -13,7 +13,8 @@ from wandb.integration.metaflow import wandb_log
 
 os.environ["WANDB_SILENT"] = "true"
 # os.environ["METAFLOW_USER"] = "test_user"
-
+del os.environ["USER"]
+os.environ['USER'] = 'test_user'
 
 class WandbExampleFlowDecoStep(FlowSpec):
     # Not obvious how to support metaflow.IncludeFile
