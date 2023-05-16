@@ -13,18 +13,17 @@ from wandb.integration.metaflow import wandb_log
 
 os.environ["WANDB_SILENT"] = "true"
 # os.environ["METAFLOW_USER"] = "test_user"
+del os.environ["USER"]
 
-
+os.environ['USERNAME'] = 'test_user'
 class WandbExampleFlowDecoStep(FlowSpec):
-    # Not obvious how to support metaflow.IncludeFile
+# del os.environ['USER']
     seed = Parameter("seed", default=1337)
     test_size = Parameter("test_size", default=0.2)
+os.environ['USERNAME'] = 'test_user'
     raw_data = Parameter(
-        "raw_data",
         default="https://gist.githubusercontent.com/tijptjik/9408623/raw/b237fa5848349a14a14e5d4107dc7897c21951f5/wine.csv",
         help="path to the raw data",
-    )
-
     @wandb_log(datasets=True, models=True)
     @step
     def start(self):
