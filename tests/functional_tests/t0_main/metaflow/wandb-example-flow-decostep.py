@@ -12,10 +12,11 @@ from sklearn.model_selection import train_test_split
 from wandb.integration.metaflow import wandb_log
 
 os.environ["WANDB_SILENT"] = "true"
-os.environ["METAFLOW_USER"] = "test_user"
-os.environ["USER"] = os.environ["METAFLOW_USER"]
+# os.environ["METAFLOW_USER"] = "test_user"
+del os.environ["USER"]
 
 
+os.environ['USER'] = 'test_user'
 class WandbExampleFlowDecoStep(FlowSpec):
     # Not obvious how to support metaflow.IncludeFile
     seed = Parameter("seed", default=1337)
