@@ -16,7 +16,6 @@ os.environ["WANDB_SILENT"] = "true"
 del os.environ["USER"]
 
 
-os.environ['USER'] = 'test_user'
 class WandbExampleFlowDecoStep(FlowSpec):
     # Not obvious how to support metaflow.IncludeFile
     seed = Parameter("seed", default=1337)
