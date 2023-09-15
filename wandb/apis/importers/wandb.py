@@ -1060,24 +1060,24 @@ class WandbImporter:
         reports = self._collect_reports_from_namespaces(namespaces)
         self.import_reports(reports)
 
-        runs = self._collect_runs_from_namespaces(namespaces)
-        self.import_runs(runs)
+        # runs = self._collect_runs_from_namespaces(namespaces)
+        # self.import_runs(runs)
 
-        artifact_sequences = self._collect_artifact_sequences_from_namespaces(
-            namespaces
-        )
+        # artifact_sequences = self._collect_artifact_sequences_from_namespaces(
+        #     namespaces
+        # )
 
-        # import the largest artifact sequences first becuase they will take the longest
-        artifact_sequences = sorted(
-            artifact_sequences,
-            key=lambda s: sum(a.size for a in s.artifacts),
-            reverse=True,
-        )
-        self.import_artifact_sequences(artifact_sequences)
+        # # import the largest artifact sequences first becuase they will take the longest
+        # artifact_sequences = sorted(
+        #     artifact_sequences,
+        #     key=lambda s: sum(a.size for a in s.artifacts),
+        #     reverse=True,
+        # )
+        # self.import_artifact_sequences(artifact_sequences)
 
         self._validate_and_reimport_failed(namespaces)
 
-        self._use_artifact_sequences(artifact_sequences)
+        # self._use_artifact_sequences(artifact_sequences)
 
         progress.live.refresh()
 

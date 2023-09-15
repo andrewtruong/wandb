@@ -175,7 +175,7 @@ def parallelize(
     iterable: Iterable,
     *args,
     description: str,
-    max_workers: Optional[int] = 64,
+    max_workers: Optional[int] = None,
     **kwargs,
 ):
     results = []
