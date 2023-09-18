@@ -452,6 +452,13 @@ def send_artifacts_with_send_manager(
         settings, record_q, result_q, interface, context_keeper
     ) as sm:
         _handle_run_record(sm, rm)
+        entity = run.entity()
+        project = run.project()
+
+        task_name = f"Use/Log Artifacts {entity}/{project}"
+        task = progress.subtask_pbar.add_task(task_name, total=len(arts))
         for art in arts:
             _handle_use_specific_artifact(sm, rm, art, config)
             _handle_log_specific_artifact(sm, rm, art, config)
+            task.advance(1)
+        progress.subtask_pbar.remove_task(task)

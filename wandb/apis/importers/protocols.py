@@ -196,7 +196,8 @@ def parallelize(
                 print(
                     f"Exception: {run.entity()=}, {run.project()=}, {run.run_id()=}, {e=} {filename=} {lineno=}. "
                 )
-                continue
+                exc.shutdown(cancel_futures=True)
+                # continue
             else:
                 results.append(result)
             finally:
