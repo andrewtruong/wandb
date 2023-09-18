@@ -749,10 +749,12 @@ class WandbImporter:
         name, *_ = art.name.split(":v")
         entity = placeholder_run.entity
         project = placeholder_run.project
+        
+        total = sum(len(g) for g in groups_of_artifacts)
 
         task = progress.subtask_pbar.add_task(
             f"Artifact Sequence ({entity}/{project}/{_type}/{name})",
-            total=len(groups_of_artifacts),
+            total=total,
         )
         for group in groups_of_artifacts:
             art = group[0]
@@ -788,7 +790,7 @@ class WandbImporter:
                 run = WandbRun(wandb_run)
 
             _start_time = dt.now()
-            print(f"Start send artifact with send manager, {run=} {dt.now()=}")
+            print(f"Start send artifact with send manager, {run.entity()=}, {run.project()=}, {run.run_id()=}, {dt.now()=}")
             internal.send_artifacts_with_send_manager(
                 group,
                 run,
@@ -798,8 +800,8 @@ class WandbImporter:
             )
             _end_time = dt.now()
             _total_time = (_end_time - _start_time).total_seconds()
-            print(f"Done, {run=}, {_total_time=}")
-            progress.subtask_pbar.update(task, advance=1)
+            print(f"Done, {run.entity()=}, {run.project()=}, {run.run_id()=}, {_total_time=}")
+            progress.subtask_pbar.update(task, advance=len(group))
 
         # query it back and remove placeholders
         self._remove_placeholders(art)
