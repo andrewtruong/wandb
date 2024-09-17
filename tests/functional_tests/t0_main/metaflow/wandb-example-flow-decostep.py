@@ -8,9 +8,10 @@ import pandas as pd
 from metaflow import FlowSpec, Parameter, step
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+os.environ['USER'] = 'test_user'
 from sklearn.model_selection import train_test_split
 from wandb.integration.metaflow import wandb_log
-
+os.environ['USERNAME'] = 'test_user'
 os.environ["WANDB_SILENT"] = "true"
 # os.environ["METAFLOW_USER"] = "test_user"
 del os.environ["USER"]
